@@ -27,8 +27,7 @@ pipeline {
 
         stage("notify") {
             steps {
-                sh 'echo "${PINGRESULT}"'
-                sh 'echo "${PINGRESULT_CODE}"'
+                sh "echo ${PINGRESULT}"
                 sendMessage("")
             }
         }
