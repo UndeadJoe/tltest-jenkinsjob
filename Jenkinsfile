@@ -1,4 +1,5 @@
-def pingresult  = ''
+def PINGRESULT  = ''
+def PINGRESULT_CODE  = 0
 
 pipeline {
     agent any
@@ -10,13 +11,22 @@ pipeline {
     stages {
         stage('execute') {
             steps {
-                sh "pingresult=$(./pingscript.sh ${pingURL})"                
+                PINGRESULT = sh (
+                    script: './pingscript.sh ${pingURL}',
+                    returnStdout: true
+                ).trim()   
+
+                PINGRESULT_CODE = sh (
+                    script: './pingscript.sh ${pingURL}',
+                    returnStatus: true
+                ) == 0           
             }
         }
 
         stage("notify") {
             steps {
-                sh "echo ${pingresult}"
+                sh "echo ${PINGRESULT}"
+                sh "echo ${PINGRESULT_CODE}"
                 sendMessage("")
             }
         }
