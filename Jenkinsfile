@@ -8,8 +8,7 @@ pipeline {
     stages {
         stage('write') {
             steps {
-                writeFile file: ".env", text: "URL=${URL}"
-                sh "cat .env"
+                sh "echo ${URL}"
             }
         }
 
