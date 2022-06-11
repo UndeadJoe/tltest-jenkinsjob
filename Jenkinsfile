@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'URL', defaultValue: 'https://ya.ru', description: 'Get URL for ping')
+        string(name: 'pingURL', defaultValue: 'https://ya.ru', description: 'Get URL for ping')
     }
 
     stages {
         stage('write') {
             steps {
-                sh "echo ${URL}"
+                sh "echo ${pingURL}"
             }
         }
 
