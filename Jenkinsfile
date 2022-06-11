@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('write') {
             steps {
-                sh "echo ${pingURL}"
+                sh "./pingscript.sh ${pingURL}"
             }
         }
 
