@@ -1,3 +1,5 @@
+def pingresult  = ''
+
 pipeline {
     agent any
 
@@ -6,17 +8,22 @@ pipeline {
     }
 
     stages {
-        stage('write') {
+        stage('execute') {
             steps {
-                sh "./pingscript.sh ${pingURL}"
+                sh "pingresult=$(./pingscript.sh ${pingURL})"                
             }
         }
 
-
-        stage('up') {
+        stage("notify") {
             steps {
-                sh "ls -lah"
+                sh "echo ${pingresult}"
+                sendMessage("")
             }
         }
     }
+}
+
+
+def sendMessage(message) {
+    
 }
