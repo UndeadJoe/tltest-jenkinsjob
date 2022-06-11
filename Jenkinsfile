@@ -11,15 +11,17 @@ pipeline {
     stages {
         stage('execute') {
             steps {
-                PINGRESULT = sh (
-                    script: './pingscript.sh ${pingURL}',
-                    returnStdout: true
-                ).trim()   
+                script {
+                    PINGRESULT = sh (
+                        script: './pingscript.sh ${pingURL}',
+                        returnStdout: true
+                    ).trim()   
 
-                PINGRESULT_CODE = sh (
-                    script: './pingscript.sh ${pingURL}',
-                    returnStatus: true
-                ) == 0           
+                    PINGRESULT_CODE = sh (
+                        script: './pingscript.sh ${pingURL}',
+                        returnStatus: true
+                    ) == 0  
+                }         
             }
         }
 
